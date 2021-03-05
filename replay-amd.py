@@ -20,10 +20,16 @@ while True:
             data = json.loads(res_body.decode("utf-8"))
             # print(data)
             #### prevent null status for details field
-            
-            status = data["game_status"]
-            if status == "score":
-                time.sleep(10)
-                keyboard.press_and_release('ctrl+shift+s')
-                time.sleep(30)
-            break
+            match_type = data["match_type"]
+            if match_type == "Social_2.0":
+                game_mode = "lobby"
+            else: 
+                game_mode = "match"
+
+            if game_mode == "match":
+                status = data["game_status"]
+                if status == "score":
+                    time.sleep(10)
+                    keyboard.press_and_release('ctrl+shift+s')
+                    time.sleep(30)
+                break
